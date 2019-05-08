@@ -2,28 +2,28 @@
   (:requirements :strips :typing) 
   (:types MONKEY BOX BANANA TREE)
   (:predicates
-        (at ?obj ?loc)
-		(holding ?obj ?height)
-		(ontable ?obj)
-		(clear ?obj)
-		(empty ?gripper)
-		(on ?obj1 ?obj2))
-  (:action PICKUP
+        (at ?obj-or-monkey ?loc)
+				(high ?obj-or-monkey)
+				(low ?obj-or-monkey)
+				(clear ?obj)			
+	)
+  (:action GO
 	:parameters
-		 (?obj1 - BLOCK
-		  ?obj2 - BLOCK
-		  ?gripper - GRIPPER)
+		 (?monkey - MONKEY
+		  ?loc-from - LOCATION
+			?loc-to - LOCATION)
 	:precondition
-		(and 	(empty ?gripper) 
-			(clear ?obj1)
-			(on ?obj1 ?obj2))
+		(and
+			(at ?monkey ?loc-from)
+		)
 	:effect
-		(and 	(holding ?obj1)
-			(clear ?obj2)
-			(not (empty ?gripper)) 
-			(not(on ?obj1 ?obj2))
-			(not(clear ?obj1))))
-
+		(and
+			(at ?monkey ?loc-to)
+			(not
+				(at ?monkey ?loc-from)
+			)
+		)
+	)
   (:action PICKUPTABLE
 	:parameters
 		(?obj - BLOCK
