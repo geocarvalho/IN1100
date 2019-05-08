@@ -30,4 +30,24 @@
 			)
 		)
 	)
+	(:action PUSH
+	:parameters
+		(?monkey - MONKEY
+		?box - OBJECT
+		?loc-fromm - LOCATION
+		?loc-to - LOCATION)
+	:precondition
+		(and
+			(at ?monkey ?loc-from)
+			(at ?box ?loc-from)
+		)
+	:effect
+		(and
+			(at ?monkey ?loc-to)
+			(at ?box ?loc-to)
+		)
+	)
+	(:action CLIMB
+	:parameters
+	)
 )
