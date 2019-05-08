@@ -1,0 +1,10 @@
+pred
+	at(obj-or-monk, loc)
+	position(obj-or-monk, height)
+
+action 
+	go(monk, loc)
+	push(monk, obj, loc-from, loc-to)
+	climb(monk, obj, height-from, heigh-to)
+	down(monk, obj, height-from, heigh-to)
+	take(obj, height-from, height-to)
