@@ -17,8 +17,8 @@
   (:action GO
 		:parameters
 			(?monkey - MONKEY
-				?loc-from - LOCATION
-				?loc-to - LOCATION)
+			?loc-from - LOCATION
+			?loc-to - LOCATION)
 		:precondition
 			(and
 				(at ?monkey ?loc-from)
@@ -55,13 +55,35 @@
 	)
 	(:action PUTDOWN
 		:parameters
+			(?monkey - MONKEY
+			?box - OBJECT
+			?loc - LOCATION)
+		:precondition
+			(and
+				(at ?monkey ?loc)
+				(holding ?box)
+				(not
+					(clear ?box)
+				)
+			)
+		:effect
+			(and
+				(at ?box ?loc)
+				(clear ?box)
+				(not
+					(holding ?obj)
+				)
+			)
 	)
 	(:action CLIMB
 		:parameters
 			(?monkey - MONKEY
-			?box - OBJECT)
+			?box - OBJECT
+			?loc - LOCATION)
 		:precondition
 			(and
+				(at ?monkey ?loc)
+				(at ?box ?loc)
 				(clear ?box)
 				(not 
 					(high ?monkey)
@@ -76,17 +98,31 @@
 				)
 			)
 	)
-	(:action TAKE
+	(:action TAKE-AND-GET-DOWN
 		:parameters
 			(?bananas - OBJECT
 			?monkey - MONKEY
-			?tree - OBJECT)
+			?tree - OBJECT
+			?loc - LOCATION)
 		:precondition
 			(and
+				(at ?monkey ?loc)
+				(at ?box ?loc)
+				(at ?tree ?loc)
 				(on ?monkey ?box)
 				(high ?monkey)
 				(on ?bananas ?tree)
+				(high ?bananas)
+			)
 		:effect
-		)
+			(and
+				(holding bananas)
+				(not
+					(on ?monkey ?box)
+					(on ?bananas ? tree)
+					(high ?monkey)
+					(high ?bananas)
+				)
+			)
 	)
 )
