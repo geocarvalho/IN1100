@@ -28,6 +28,9 @@
 				(not
 					(at ?monkey ?loc-from)
 				)
+				(not
+					(high ?monkey)
+				)
 			)
 	)
 	(:action TAKE-OBJ
@@ -73,20 +76,20 @@
 	:parameters
 		(?monkey - ANIMAL
 		?obj - OBJECT
-		?fruit - FRUIT
+		?bananas - FRUIT
 		?loc - LOCATION)
 	:precondition
 		(and
 		    (at ?monkey ?loc)
 		    (at ?obj ?loc)
-		    (at ?fruit ?loc)
+		    (at ?bananas ?loc)
 		)
 	:effect
 		(and
 		    (on ?monkey ?obj)
 		    (high ?monkey)
 		    (not
-		        (high ?fruit)
+		        (high ?bananas)
 		    )
 		)
 	)

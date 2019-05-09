@@ -18,7 +18,8 @@
         (high bananas)
     )
     (:goal 
-        (and 
+        (and
+            (at monkey cposition)
             (not
                 (high bananas)
             )
