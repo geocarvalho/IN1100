@@ -4,19 +4,18 @@
 ;;    based on logistics-strips-length.
 ;; 2019-05-07
 
-(define (domain logistics-typed)
-  (:requirements :strips :typing) 
-  (:types MONKEY OBJECT LOCATION)
-  (:predicates
+(define	(domain logistics-typed)
+	(:requirements :strips :typing) 
+	(:types ANIMAL OBJECT LOCATION FRUIT)
+	(:predicates
         (at ?obj-or-monkey ?loc)
-				(on ?obj-or-monkey ?obj)
-				(high ?obj-or-monkey)
-				(clear ?obj)
-				(holding ?obj)
+        (on ?monkey ?obj)
+		(holding ?obj ?monkey)
+		(high ?monkey-or-fruit)
 	)
-  (:action GO
+	(:action GO
 		:parameters
-			(?monkey - MONKEY
+			(?monkey - ANIMAL
 			?loc-from - LOCATION
 			?loc-to - LOCATION)
 		:precondition
@@ -31,98 +30,64 @@
 				)
 			)
 	)
-	(:action PICKUP
-		:parameters
-			(?monkey - MONKEY
-			?box - OBJECT
-			?loc - LOCATION
-		:precondition
-			(and
-				(at ?monkey ?loc)
-				(at ?box ?loc)
-				(clear ?box)
-				(not
-					(holding ?box)
-				)
-			)
-		:effect
-			(and
-				(holding ?box)
-				(not
-					(clear ?box)
-				)
-			)
+	(:action TAKE-OBJ
+	:parameters
+		(?monkey - ANIMAL
+		?obj - OBJECT
+		?loc - LOCATION)
+	:precondition
+		(and
+		    (at ?monkey ?loc)
+		    (at ?obj ?loc)
+		    (not
+		        (high ?obj)   
+		    )
+		)
+	:effect
+		(and
+		    (holding ?obj ?monkey)
+		    (not
+        	    (at ?obj ?loc)
+		    )
+		)
 	)
-	(:action PUTDOWN
-		:parameters
-			(?monkey - MONKEY
-			?box - OBJECT
-			?loc - LOCATION)
-		:precondition
-			(and
-				(at ?monkey ?loc)
-				(holding ?box)
-				(not
-					(clear ?box)
-				)
-			)
-		:effect
-			(and
-				(at ?box ?loc)
-				(clear ?box)
-				(not
-					(holding ?obj)
-				)
-			)
+	(:action TAKE-OFF-OBJ
+	:parameters
+		(?monkey - ANIMAL
+		?obj - OBJECT
+		?loc - LOCATION)
+	:precondition
+		(and
+		    (at ?monkey ?loc)
+		    (holding ?obj ?monkey)
+		)
+	:effect
+		(and
+		    (at ?obj ?loc)
+		    (not
+        	    (holding ?obj ?monkey)
+		    )
+		)
 	)
-	(:action CLIMB
-		:parameters
-			(?monkey - MONKEY
-			?box - OBJECT
-			?loc - LOCATION)
-		:precondition
-			(and
-				(at ?monkey ?loc)
-				(at ?box ?loc)
-				(clear ?box)
-				(not 
-					(high ?monkey)
-				)
-			)
-		:effect
-			(and
-				(on ?monkey ?box)
-				(high ?monkey)
-				(not
-					(clear ?box)
-				)
-			)
-	)
-	(:action TAKE-AND-GET-DOWN
-		:parameters
-			(?bananas - OBJECT
-			?monkey - MONKEY
-			?tree - OBJECT
-			?loc - LOCATION)
-		:precondition
-			(and
-				(at ?monkey ?loc)
-				(at ?box ?loc)
-				(at ?tree ?loc)
-				(on ?monkey ?box)
-				(high ?monkey)
-				(on ?bananas ?tree)
-				(high ?bananas)
-			)
-		:effect
-			(and
-				(holding bananas)
-				(not
-					(on ?monkey ?box)
-					(on ?bananas ? tree)
-					(high ?monkey)
-					(high ?bananas)
-				)
-			)
+	(:action CLIMB-OBJ
+	:parameters
+		(?monkey - ANIMAL
+		?obj - OBJECT
+		?fruit - FRUIT
+		?loc - LOCATION)
+	:precondition
+		(and
+		    (at ?monkey ?loc)
+		    (at ?obj ?loc)
+		    (at ?fruit ?loc)
+		)
+	:effect
+		(and
+		    (on ?monkey ?obj)
+		    (high ?monkey)
+		    (not
+		        (high ?fruit)
+		    )
+		)
 	)
 )
