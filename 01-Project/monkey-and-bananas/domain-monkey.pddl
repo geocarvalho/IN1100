@@ -31,9 +31,6 @@
 				(not
 					(at ?monkey ?loc-from)
 				)
-				(not
-					(high ?monkey)
-				)
 			)
 	)
 	(:action TAKE-BOX
