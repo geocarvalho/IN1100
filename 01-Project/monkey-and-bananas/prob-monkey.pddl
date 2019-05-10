@@ -19,10 +19,7 @@
     )
     (:goal 
         (and
-            (at monkey cposition)
-            (not
-                (high bananas)
-            )
+            (at bananas aposition)
         )
     )
 )
