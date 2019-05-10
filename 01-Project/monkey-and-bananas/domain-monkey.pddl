@@ -43,7 +43,7 @@
 		    (at ?monkey ?loc)
 		    (at ?box ?loc)
 		    (not
-		        (high ?box)   
+		        (high ?monkey)   
 		    )
 		)
 	:effect
