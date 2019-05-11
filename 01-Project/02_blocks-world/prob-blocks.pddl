@@ -4,22 +4,30 @@
 (define (problem monkey-and-banana)
     (:domain logistics-typed)
     (:objects
-        monkey - ANIMAL
-        box - OBJECT
-        bananas - FRUIT
-        aposition - LOCATION
-        bposition - LOCATION
-        cposition - LOCATION
+        boxA - BOX
+        boxB - BOX
+        boxC - BOX
+        person1 - PERSON
+        person2 - PERSON
+        position1 - LOCATION
+        position2 - LOCATION
+        position3 - LOCATION
+        position4 - LOCATION
+        position5 - LOCATION
+        position6 - LOCATION
+        position7 - LOCATION
+        position8 - LOCATION
+        position9 - LOCATION
+        position10 - LOCATION
+        position11 - LOCATION
+        position12 - LOCATION
     )
     (:init
-        (at monkey aposition)
-        (at box bposition)
-        (at bananas cposition)
-        (high bananas)
+        (at person1 position2)
     )
     (:goal 
         (and
-            (at bananas aposition)
+            (at person1 position3)
         )
     )
 )

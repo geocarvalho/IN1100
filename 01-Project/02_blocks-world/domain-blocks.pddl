@@ -6,155 +6,134 @@
 
 (define	(domain logistics-typed)
 	(:requirements :strips :typing) 
-	(:types ANIMAL OBJECT LOCATION FRUIT)
+	(:types PERSON OBJECT LOCATION)
 	(:predicates
-        (at ?box-or-bananas-or-monkey ?loc)
-        (on ?monkey ?box)
-		(holding ?box-or-bananas ?monkey)
-		(high ?monkey-or-bananas)
+        (at ?box-or-human ?loc)
+        (on ?box1 ?box2)
+		(holding ?box ?human)
+		(clear ?box)
 	)
 	(:action GO
 		:parameters
-			(?monkey - ANIMAL
+			(?human - PERSON
 			?loc-from - LOCATION
 			?loc-to - LOCATION)
 		:precondition
 			(and
-				(at ?monkey ?loc-from)
-				(not
-				    (high ?monkey)
-				)
+				(at ?human ?loc-from)
 			)
 		:effect
 			(and
-				(at ?monkey ?loc-to)
+				(at ?human ?loc-to)
 				(not
-					(at ?monkey ?loc-from)
+					(at ?human ?loc-from)
 				)
 			)
 	)
+	
 	(:action TAKE-BOX
 	:parameters
-		(?monkey - ANIMAL
+		(?human - PERSON
 		?box - OBJECT
 		?loc - LOCATION)
 	:precondition
 		(and
-		    (at ?monkey ?loc)
+		    (at ?human ?loc)
 		    (at ?box ?loc)
-		    (not
-		        (high ?monkey)   
-		    )
+		    (clear ?box)
+		    (clear ?human)
 		)
 	:effect
 		(and
-		    (holding ?box ?monkey)
+		    (holding ?box ?human)
 		    (not
         	    (at ?box ?loc)
 		    )
-		)
-	)
-	(:action TAKE-FRUIT
-	:parameters
-		(?monkey - ANIMAL
-		?bananas - FRUIT
-		?loc - LOCATION)
-	:precondition
-		(and
-		    (at ?monkey ?loc)
-		    (at ?bananas ?loc)
 		    (not
-		        (high ?bananas)   
+		        (clear ?box)
 		    )
 		    (not
-		        (high ?monkey)
-		    )
-		)
-	:effect
-		(and
-		    (holding ?bananas ?monkey)
-		    (not
-        	    (at ?bananas ?loc)
+		        (clear ?human)
 		    )
 		)
 	)
+	
 	(:action TAKE-OFF-BOX
 	:parameters
-		(?monkey - ANIMAL
+		(?human - PERSON
 		?box -  OBJECT
 		?loc - LOCATION)
 	:precondition
 		(and
-		    (at ?monkey ?loc)
-		    (holding ?box ?monkey)
+		    (at ?human ?loc)
+		    (holding ?box ?human)
+			(not
+				(clear ?box)
+			)
+			(not
+			    (clear ?human)
+			)
 		)
 	:effect
 		(and
 		    (at ?box ?loc)
+			(clear ?box)
+			(clear ?human)
 		    (not
-        	    (holding ?box ?monkey)
+        	    (holding ?box ?human)
 		    )
 		)
 	)
-	(:action TAKE-OFF-FRUIT
+)
+	(:action PUT-BOX-ON
 	:parameters
-		(?monkey - ANIMAL
-		?bananas - FRUIT
+		(?human - PERSON
+		?box1 - OBJECT
+		?box2 - OBJECT
 		?loc - LOCATION)
 	:precondition
 		(and
-		    (at ?monkey ?loc)
-		    (holding ?bananas ?monkey)
+		    (at ?human ?loc)
+		    (at ?box1 ?loc)
+			(at ?box2 ?loc)
+			(clear ?box1)
+			(clear ?box2)
+			(clear ?human)
 		)
 	:effect
 		(and
-		    (at ?bananas ?loc)
-		    (not
-        	    (holding ?bananas ?monkey)
-		    )
-		)
-	)
-	(:action CLIMB-BOX-DROP-BANANAS
-	:parameters
-		(?monkey - ANIMAL
-		?box - OBJECT
-		?bananas - FRUIT
-		?loc - LOCATION)
-	:precondition
-		(and
-		    (at ?monkey ?loc)
-		    (at ?box ?loc)
-		    (at ?bananas ?loc)
-		)
-	:effect
-		(and
-		    (on ?monkey ?box)
-		    (high ?monkey)
-		    (not
-		        (high ?bananas)
-		    )
+		    (on ?box2 ?box1)
+			(not
+				(at ?box2 ?loc)
+			)
+			(not
+				(clear ?box1)
+			)
 		)
 	)
 	(:action GET-OFF-BOX
 	:parameters
-	    (?monkey - ANIMAL
-	    ?box - OBJECT
+	    (?human - PERSON
+	    ?box1 - OBJECT
+		?box2 - OBJECT
 	    ?loc - LOCATION)
 	:precondition
 	    (and
-	        (at ?box ?loc)
-	        (on ?monkey ?box)
-	        (high ?monkey)
+			(on ?box2 ?box1)
+			(not
+				(at ?box2 ?loc)
+			)
+			(not
+				(clear ?box2)
+			)
 	    )
 	:effect
 	    (and
-	        (at ?monkey ?loc)
 	        (not
-	            (on ?monkey ?box)
-	        )
-	        (not
-	            (high ?monkey)
-	        )
+				(on ?box2 ?box1)
+			)
+			(at ?box2 ?loc)
+			(clear ?box1)
 	    )
 	)
 )
