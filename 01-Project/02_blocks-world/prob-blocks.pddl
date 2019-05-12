@@ -4,9 +4,9 @@
 (define (problem monkey-and-banana)
     (:domain logistics-typed)
     (:objects
-        boxA - BOX
-        boxB - BOX
-        boxC - BOX
+        boxA - OBJECT
+        boxB - OBJECT
+        boxC - OBJECT
         person1 - PERSON
         person2 - PERSON
         position1 - LOCATION
@@ -24,10 +24,23 @@
     )
     (:init
         (at person1 position2)
+        (at person2 position6)
+        (at boxA position11)
+        (at boxB position7)
+        (at boxX position7)
+        (on boxC boxA)
+        (clear person1)
+        (clear person2)
+        (clear boxB)
+        (clear boxC)
+        (not
+            (clear boxA)
+        )
     )
     (:goal 
         (and
-            (at person1 position3)
+            (at person1 position12)
+            (on boxB boxC)
         )
     )
 )
