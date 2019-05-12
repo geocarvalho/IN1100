@@ -84,7 +84,6 @@
 		    )
 		)
 	)
-)
 	(:action PUT-BOX-ON
 	:parameters
 		(?human - PERSON
@@ -104,9 +103,6 @@
 		(and
 		    (on ?box2 ?box1)
 			(not
-				(at ?box2 ?loc)
-			)
-			(not
 				(clear ?box1)
 			)
 		)
@@ -121,9 +117,6 @@
 	    (and
 			(on ?box2 ?box1)
 			(not
-				(at ?box2 ?loc)
-			)
-			(not
 				(clear ?box2)
 			)
 	    )
@@ -134,6 +127,7 @@
 			)
 			(at ?box2 ?loc)
 			(clear ?box1)
+			(clear ?box2)
 	    )
 	)
 )
