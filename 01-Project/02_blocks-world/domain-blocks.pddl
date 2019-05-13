@@ -115,19 +115,22 @@
 	    ?loc - LOCATION)
 	:precondition
 	    (and
+			(at ?human ?loc)
+			(at ?box1 ?loc)
+			(at ?box2 ?loc)
 			(on ?box2 ?box1)
 			(not
-				(clear ?box2)
+				(clear ?box1)
 			)
+			(clear ?box2)
+			(clear ?human)
 	    )
 	:effect
 	    (and
 	        (not
 				(on ?box2 ?box1)
 			)
-			(at ?box2 ?loc)
 			(clear ?box1)
-			(clear ?box2)
 	    )
 	)
 )
