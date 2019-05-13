@@ -1,6 +1,5 @@
 ;; problem from monkey-and-banana project
 ;; 2019-05-08
-
 (define (problem monkey-and-banana)
     (:domain logistics-typed)
     (:objects
@@ -27,20 +26,22 @@
         (at person2 position6)
         (at boxA position11)
         (at boxB position7)
-        (at boxX position7)
-        (on boxC boxA)
+        (at boxC position7)
         (clear person1)
         (clear person2)
-        (clear boxB)
+        (clear boxA)
         (clear boxC)
-        (not
-            (clear boxA)
-        )
+        (clear boxB)
     )
     (:goal 
         (and
             (at person1 position12)
+            (at person2 position12)
+            (at boxA position12)
+            (at boxB position12)
+            (at boxC position12)
             (on boxB boxC)
+            (on boxA boxB)
         )
     )
 )
