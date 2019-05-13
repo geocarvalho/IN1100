@@ -1,7 +1,6 @@
 ;; logistics domain
-;;
 ;; logistics-typed-length: strips + simple types
-;;    based on logistics-strips-length.
+;; based on logistics-strips-length.
 ;; 2019-05-07
 
 (define	(domain logistics-typed)
@@ -111,7 +110,7 @@
 	:parameters
 	    (?human - PERSON
 	    ?box1 - OBJECT
-		?box2 - OBJECT
+	    ?box2 - OBJECT
 	    ?loc - LOCATION)
 	:precondition
 	    (and
