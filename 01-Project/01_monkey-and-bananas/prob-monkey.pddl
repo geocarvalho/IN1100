@@ -6,7 +6,7 @@
     (:objects
         monkey - ANIMAL
         box - OBJECT
-        bananas - FRUIT
+        bananas - OBJECT
         aposition - LOCATION
         bposition - LOCATION
         cposition - LOCATION
