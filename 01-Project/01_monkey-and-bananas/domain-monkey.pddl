@@ -1,14 +1,17 @@
-;; Monkey problem 
+;; logistics domain
+;;
+;; logistics-typed-length: strips + simple types
+;;    based on logistics-strips-length.
 ;; 2019-05-07
 
 (define	(domain logistics-typed)
 	(:requirements :strips :typing) 
-	(:types ANIMAL OBJECT LOCATION FRUIT)
+	(:types ANIMAL OBJECT LOCATION)
 	(:predicates
-        (at ?box-or-bananas-or-monkey ?loc)
-        (on ?monkey ?box)
-		(holding ?box-or-bananas ?monkey)
-		(high ?monkey-or-bananas)
+        (at ?obj-or-monkey ?loc)
+        (on ?monkey ?obj)
+		(holding ?obj ?monkey)
+		(high ?monkey-or-obj)
 	)
 	(:action GO
 		:parameters
@@ -18,142 +21,102 @@
 		:precondition
 			(and
 				(at ?monkey ?loc-from)
-				(not
-				    (high ?monkey)
-				)
+				(not (high ?monkey))
 			)
 		:effect
 			(and
 				(at ?monkey ?loc-to)
-				(not
-					(at ?monkey ?loc-from)
-				)
+				(not (at ?monkey ?loc-from))
 			)
 	)
-	(:action TAKE-BOX
+	(:action TAKE-LOW
 	:parameters
 		(?monkey - ANIMAL
-		?box - OBJECT
+		?obj - OBJECT
 		?loc - LOCATION)
 	:precondition
 		(and
 		    (at ?monkey ?loc)
-		    (at ?box ?loc)
+		    (at ?obj ?loc)
 		    (not (high ?monkey))
-		    (not (high ?box))
+		    (not (high ?obj))
 		)
 	:effect
 		(and
-		    (holding ?box ?monkey)
-		    (not
-        	    (at ?box ?loc)
-		    )
+		    (holding ?obj ?monkey)
+		    (not (at ?obj ?loc))
 		)
 	)
-	(:action TAKE-FRUIT
+	(:action TAKE-HIGH
 	:parameters
 		(?monkey - ANIMAL
-		?bananas - FRUIT
+		?obj - OBJECT
 		?loc - LOCATION)
 	:precondition
 		(and
 		    (at ?monkey ?loc)
-		    (at ?bananas ?loc)
-		    (not
-		        (high ?bananas)   
-		    )
-		    (not
-		        (high ?monkey)
-		    )
-		)
-	:effect
-		(and
-		    (holding ?bananas ?monkey)
-		    (not
-        	    (at ?bananas ?loc)
-		    )
-		)
-	)
-	(:action TAKE-OFF-BOX
-	:parameters
-		(?monkey - ANIMAL
-		?box -  OBJECT
-		?loc - LOCATION)
-	:precondition
-		(and
-		    (at ?monkey ?loc)
-		    (holding ?box ?monkey)
-		)
-	:effect
-		(and
-		    (at ?box ?loc)
-		    (not
-        	    (holding ?box ?monkey)
-		    )
-		)
-	)
-	(:action TAKE-OFF-FRUIT
-	:parameters
-		(?monkey - ANIMAL
-		?bananas - FRUIT
-		?loc - LOCATION)
-	:precondition
-		(and
-		    (at ?monkey ?loc)
-		    (holding ?bananas ?monkey)
-		)
-	:effect
-		(and
-		    (at ?bananas ?loc)
-		    (not
-        	    (holding ?bananas ?monkey)
-		    )
-		)
-	)
-	(:action CLIMB-BOX-DROP-BANANAS
-	:parameters
-		(?monkey - ANIMAL
-		?box - OBJECT
-		?bananas - FRUIT
-		?loc - LOCATION)
-	:precondition
-		(and
-		    (at ?monkey ?loc)
-		    (at ?box ?loc)
-		    (at ?bananas ?loc)
-		    (not (high ?monkey))
-		    (not (high ?box))
-		)
-	:effect
-		(and
-		    (on ?monkey ?box)
+		    (at ?obj ?loc)
+		    (high ?obj)
 		    (high ?monkey)
-		    (not
-		        (high ?bananas)
-		    )
-		    (not (high ?box))
+		)
+	:effect
+		(and
+		    (holding ?obj ?monkey)
+		    (not (at ?obj ?loc))
 		)
 	)
-	(:action GET-OFF-BOX
+	(:action TAKE-OFF-LOW
+	:parameters
+		(?monkey - ANIMAL
+		?obj -  OBJECT
+		?loc - LOCATION)
+	:precondition
+		(and
+		    (at ?monkey ?loc)
+		    (holding ?obj ?monkey)
+		)
+	:effect
+		(and
+		    (at ?obj ?loc)
+		    (not (holding ?obj ?monkey))
+		    (not (high ?obj))
+		)
+	)
+	(:action CLIMB
+	:parameters
+		(?monkey - ANIMAL
+		?obj - OBJECT
+		?loc - LOCATION)
+	:precondition
+		(and
+		    (at ?monkey ?loc)
+		    (at ?obj ?loc)
+		    (not (high ?monkey))
+		    (not (high ?obj))
+		)
+	:effect
+		(and
+		    (on ?monkey ?obj)
+		    (high ?monkey)
+		)
+	)
+	(:action GET-DOWN
 	:parameters
 	    (?monkey - ANIMAL
-	    ?box - OBJECT
+	    ?obj - OBJECT
 	    ?loc - LOCATION)
 	:precondition
 	    (and
-	        (at ?box ?loc)
-	        (on ?monkey ?box)
+	        (at ?obj ?loc)
+	        (at ?monkey ?loc)
+	        (on ?monkey ?obj)
 	        (high ?monkey)
 	    )
 	:effect
 	    (and
-	        (at ?monkey ?loc)
-	        (not
-	            (on ?monkey ?box)
-	        )
-	        (not
-	            (high ?monkey)
-	        )
+	        (at ?monkey ?obj)
+	        (not (on ?monkey ?obj))
+	        (not (high ?monkey))
 	    )
 	)
 )
