@@ -1,8 +1,5 @@
-;; logistics domain
-;;
-;; logistics-typed-length: strips + simple types
-;;    based on logistics-strips-length.
-;; 2019-05-07
+;; problem from monkey-and-banana project
+;; 2019-05-08
 
 (define	(domain logistics-typed)
 	(:requirements :strips :typing) 
@@ -14,22 +11,24 @@
 		(high ?monkey-or-obj)
 	)
 	(:action GO
+	; Move ANIMAL for LOCATION1 to LOCATION2
 		:parameters
 			(?monkey - ANIMAL
-			?loc-from - LOCATION
-			?loc-to - LOCATION)
+			?loc1 - LOCATION
+			?loc2 - LOCATION)
 		:precondition
 			(and
-				(at ?monkey ?loc-from)
+				(at ?monkey ?loc1)
 				(not (high ?monkey))
 			)
 		:effect
 			(and
-				(at ?monkey ?loc-to)
-				(not (at ?monkey ?loc-from))
+				(at ?monkey ?loc2)
+				(not (at ?monkey ?loc1))
 			)
 	)
 	(:action TAKE-LOW
+	; Take OBJECT not high and can move with it
 	:parameters
 		(?monkey - ANIMAL
 		?obj - OBJECT
@@ -48,6 +47,7 @@
 		)
 	)
 	(:action TAKE-HIGH
+	; Take OBJECT in high positions and can move with it
 	:parameters
 		(?monkey - ANIMAL
 		?obj - OBJECT
@@ -66,6 +66,7 @@
 		)
 	)
 	(:action TAKE-OFF-LOW
+	; Drop OBJECTs that are holding in low position
 	:parameters
 		(?monkey - ANIMAL
 		?obj -  OBJECT
@@ -83,6 +84,7 @@
 		)
 	)
 	(:action CLIMB
+	; Climb OBJECT to get high position
 	:parameters
 		(?monkey - ANIMAL
 		?obj - OBJECT
@@ -101,6 +103,7 @@
 		)
 	)
 	(:action GET-DOWN
+	; Get down OBJECT to get low position
 	:parameters
 	    (?monkey - ANIMAL
 	    ?obj - OBJECT
