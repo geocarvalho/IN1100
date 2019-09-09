@@ -8,4 +8,6 @@
 
 # [IN1119 - Princípios e Técnicas da Análise Estatística Experimental](https://sites.google.com/a/cin.ufpe.br/in1119/)
 
-## References
+# [IF699 - Aprendizagem de máquina](https://www.cin.ufpe.br/~fatc/AM/)
+
+* Primeiro projeto: Francisco Carvalho
