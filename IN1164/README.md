@@ -19,7 +19,8 @@ Funções:
 - Brown function
 - Exponential function
 
-Para funções olhar o site: http://benchmarkfcns.xyz/
-[Slides da apresentação dos resultados](https://docs.google.com/presentation/d/1BZ68gNT03y-bu-W63-xPCwpGZFDBjfXlVMDpREZB8UM/edit?usp=sharing)
+> Para funções olhar o site: http://benchmarkfcns.xyz/
+
+> [Slides da apresentação dos resultados](https://docs.google.com/presentation/d/1BZ68gNT03y-bu-W63-xPCwpGZFDBjfXlVMDpREZB8UM/edit?usp=sharing)
 
 ## Projeto final
