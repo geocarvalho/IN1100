@@ -11,3 +11,6 @@
 # [IF699 - Aprendizagem de máquina](https://www.cin.ufpe.br/~fatc/AM/)
 
 * Primeiro projeto: Francisco Carvalho
+
+# [IN1164 - Inteligência de enxames]
+
