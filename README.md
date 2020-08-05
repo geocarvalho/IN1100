@@ -12,5 +12,5 @@
 
 * Primeiro projeto: Francisco Carvalho
 
-# [IN1164 - Inteligência de enxames]
+# IN1164 - Inteligência de enxames
 
